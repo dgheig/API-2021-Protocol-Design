@@ -4,8 +4,8 @@
 
 > What does the protocol do?
 
-[exp4j](https://www.baeldung.com/java-evaluate-math-expression-string) as a service
-https://www.objecthunter.net/exp4j/
+This is a "[exp4j](https://www.objecthunter.net/exp4j/) as a service"
+
 
 
 
@@ -15,11 +15,11 @@ https://www.objecthunter.net/exp4j/
   Le protocole TCP
 
 - How does the client find the server (addresses and ports)?
-  L'adresse sera connue, le port fixé à 3241
+  L'adresse sera connue, le port fixé à 2400
 
 - Who speaks first?
 
-  Le client envoie directement son expression.
+  Le serveur commence la communication en envoyant "WELCOME !"
 
 - Who closes the connection and when?
   C'est le client qui ferme la connection, sauf en cas d'erreur.
@@ -30,13 +30,12 @@ https://www.objecthunter.net/exp4j/
 
 - What is the syntax of the messages?
 
-  L'application ne permet que de faire des calculs sans mémoire/historique.
-  L'utilisateur envoie simplement son expression mathématique composée des symboles `()+-*/%^`.
+  L'application ne permet que de faire des calculs sans mémoire/historique. Les opérations supportées et la syntaxe sont définies par la librairie [exp4j](https://www.objecthunter.net/exp4j/)
 
-  * Les valeurs décimales sont notées avec le séparateur `.`
-  * le symbole `'` (guillemet simple) sera ignoré simplement ignoré. Il peut-être utilisée, par exemple, pour marquer les milliers.  
+  Le serveur lui envoie ensuite:
 
-  Le serveur lui envoie ensuite la valeur numérique ou un message d'erreur
+  * "Result: " suivi de la valeur
+  * "Error: " suivi du message d'erreur
 
 - What is the sequence of messages exchanged by the client and the server? (flow)
 
@@ -50,10 +49,13 @@ https://www.objecthunter.net/exp4j/
 
 ## Specific elements (if useful)
 
-- Supported operations
-- Error handling
+- Supported operations; All operations supported by [exp4j](https://www.objecthunter.net/exp4j/), except the one requiring history or variables
+- Error handling: The message starts with "Error: " followed by the error message.
 - Extensibility
 
 
 
 ## Examples: examples of some typical dialogs.
+
+![example](example.png)
+
